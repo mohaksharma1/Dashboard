@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px 0;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-size: 1.2em;
+        }
+        .nested-table {
+            width: 100%;
+            margin: 0;
+            border: none;
+        }
+        .nested-table th, .nested-table td {
+            border: none;
+            padding: 5px;
+        }
+        .title-row {
+            background-color: #e0f7fa;
+        }
+        .body-row {
+            background-color: #e8f5e9;
+        }
+    </style>
+    <title>All Orders</title>
+</head>
+<body>
+    <h1>All Orders</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Order No</th>
+                <th>Order Date</th>
+                <th>Customer Name</th>
+                <th>Mobile No</th>
+                <th>Place</th>
+                <th>Orders
+            <table border="1">
+                <thead>
+                            <td>Product Name</td>
+                            <td>Quantity</td>
+                            <td>Price</td>
+                            <td>Amount</td>
+                </thead>
+            </table>
+                </th>
+                <th>Remarks</th>
+        </tr>
+        </thead>
+
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row['order_id'] }}</td>
+                <td>{{ row['order_date'] }}</td>
+                <td>{{ row['customer_name'] }}</td>
+                <td>{{ row['mobile_no'] }}</td>
+                <td>{{ row['place'] }}</td>
+               <td>
+        <table border="1">
+        <tbody>
+            {% for row2 in rows2 %}
+                {% if row2['order_id'] == row['order_id']  %}
+            <tr>
+                <td>{{ row2['product_name'] }}</td>
+                <td>{{ row2['quantity'] }}</td>
+                <td>{{ row2['price'] }}</td>
+                <td>{{ row2['quantity']*row2['price'] }}</td>
+            </tr>
+                {% endif %}
+
+            {% endfor %}
+        </tbody>
+        </table>
+        </td>
+
+
+        <td>{{ row['remarks'] }}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
