@@ -1,5 +1,5 @@
 import base64
-import datetime
+import datetime,subprocess, sys
 import os
 import shutil
 import sqlite3
@@ -1792,58 +1792,21 @@ def submitsale():
 '''
 
 
-@app.route('/test')
+@app.route('/quit')
+def exitor():
+    sys.exit()
+    return "Exiting....."
+
+@app.route('/upgrade')
 def testHtml():
-    return '''
-   <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Save Webpage as Image</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-</head>
-<body>
-
-    <div id="capture" style="width: 600px; height: 400px; border: 1px solid black; padding: 20px;">
-        <h1>Hello, World!</h1>
-        <p>This is a sample webpage content that will be captured as an image.</p>
-    </div>
-
-    <button id="capture-btn">Capture as Image</button>
-
-    <script>
-
-        document.getElementById('capture-btn').addEventListener('click', function() {
-            html2canvas(document.querySelector("#capture")).then(canvas => {
-                              
-                const form = document.createElement('form');
-
-        // Set the form's attributes
-        form.action = 'testsubmit'; // Replace with your action URL
-        form.method = 'POST'; // or 'GET', depending on your needs
-
-        // Create an input element
-        const input = document.createElement('input');
-        input.type = 'hidden'; // use 'hidden' to keep it out of view
-        input.name = 'imgdata'; // Name of the input
-        input.value = canvas.toDataURL(); // Value to send
-
-        // Append the input to the form
-        form.appendChild(input);
-
-        // Append the form to the body (optional)
-        document.body.appendChild(form);
-
-        // Submit the form
-        form.submit();
-            });
-        });
-    </script>
-
-</body>
-</html>
-'''
+    try:
+        subprocess.run([sys.executable, "updateMe.py"], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error while running script: {e}")
+    finally:
+        # Exit the runner script
+        sys.exit()
+    return "Updating..."
 
 
 @app.route('/testsubmit', methods=['POST'])

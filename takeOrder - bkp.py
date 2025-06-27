@@ -5,6 +5,7 @@ import shutil
 import sqlite3
 
 from flask import Flask, request, send_from_directory, render_template
+from updater import check_update
 
 database = 'orders.db'
 
@@ -47,7 +48,7 @@ def get_order(order_id):
     orderss = cursor.fetchall()
     conn.commit()
     conn.close()
-    print(orderss)
+    # print(orderss)
     return order_items, orderss
 
 
@@ -76,6 +77,9 @@ def welcome():
         msg=f"Net Profit is <b>₹ {getTotalSale()-getTotalPurchase()} </b>"
     else:
         msg=f"Net Loss is <b>₹ {getTotalSale()-getTotalPurchase()} </b>"
+    upd=""
+    if check_update()==1:
+        upd="Update Availble"
 
     return '''
 <!DOCTYPE html>
@@ -146,7 +150,9 @@ def welcome():
 <div class="container">
     <h1>Welcome to Silver Scissors Admin Dashboard</h1>
     <p>Manage orders, ledger, and status efficiently with categorized tools.</p>
-    '''+f'<p>{msg}</p>'+'''
+    '''+f'''<p>{msg}</p>
+    <p>{upd}</p>
+    '''+'''
     
     <!-- Orders Section -->
     <h2 class="section-title">Orders</h2>
@@ -1865,6 +1871,25 @@ def submit():
     <body >
 
 ''' + f'<a href="{msg}" download="bill.png">Download bill</a>' + '''
+
+   <button id="shareBtn">Share Image</button>
+
+    <script>
+        document.getElementById("shareBtn").addEventListener("click", function() {
+            if (typeof Android !== "undefined" && Android.shareImage) {
+                Android.shareImage("http://192.168.1.8:5000/bill.png"); // Replace with actual image URL
+            } else {
+                console.error("Android interface not found!");
+            }
+        });
+    </script>
+
+
+
+
+
+
+
 </body>
 </html>
 '''
