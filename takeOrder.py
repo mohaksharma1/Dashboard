@@ -4,6 +4,7 @@ import os
 import shutil
 import sqlite3
 
+
 from flask import Flask, request, send_from_directory, render_template
 from updater import check_update
 
