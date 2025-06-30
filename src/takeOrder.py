@@ -1807,6 +1807,7 @@ def testHtml():
         finally:
             python = sys.executable
             os.execl(python, python, *sys.argv)
+    shutil.rmtree("Dashboard")
     return """<!DOCTYPE html>
 <html>
    <head>
