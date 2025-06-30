@@ -1,5 +1,6 @@
 import os, sys, shutil
 from git import Repo
+from .src import updater
 
 def clone_repo(repo_url, destination_folder=None):
     try:
@@ -11,20 +12,18 @@ def clone_repo(repo_url, destination_folder=None):
     except Exception as e:
         print(f"Error cloning repository: {e}")
 
-
-
-
-
-
 # Example usage
 if __name__ == "__main__":
-    print("updating...")
-    github_url = "https://github.com/mohaksharma1/Dashboard.git"  # Replace with your desired repo
-    clone_repo(github_url)
-    os.system('copy "./src/orders.db" "C:\\Users\\mohak\\Documents"')
-    shutil.rmtree("src")
-    shutil.copytree(os.path.join(os.getcwd(),"Dashboard\\src"), os.path.join(os.getcwd(),"src"))
-    os.system(f'copy  "C:\\Users\\mohak\\Documents\\orders.db" {os.path.join(os.getcwd(),"src")}')
-    print("update complete")
-    sys.exit(1)
+    if check_update()==1:
+        print("updating...")
+        github_url = "https://github.com/mohaksharma1/Dashboard.git"  # Replace with your desired repo
+        clone_repo(github_url)
+        os.system('copy "./src/orders.db" "C:\\Users\\mohak\\Documents"')
+        shutil.rmtree("src")
+        shutil.copytree(os.path.join(os.getcwd(),"Dashboard\\src"), os.path.join(os.getcwd(),"src"))
+        os.system(f'copy  "C:\\Users\\mohak\\Documents\\orders.db" {os.path.join(os.getcwd(),"src")}')
+        print("update complete")
+        sys.exit(1)
+    else:
+        print("Update not required")
 
