@@ -1805,7 +1805,8 @@ def testHtml():
         print(f"Error while running script: {e}")
     finally:
         # Exit the runner script
-        sys.exit()
+        python = sys.executable
+        os.execl(python, python, *sys.argv)
     return "Updating..."
 
 
