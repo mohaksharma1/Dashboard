@@ -151,7 +151,7 @@ def welcome():
     <h1>Welcome to Silver Scissors Admin Dashboard</h1>
     <p>Manage orders, ledger, and status efficiently with categorized tools.</p>
     '''+f'''<p>{msg}</p>
-    <p>{upd}</p>
+     <a href="/upgrade"><p>{upd}</p></a>
     '''+'''
     
     <!-- Orders Section -->
