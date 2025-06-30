@@ -1799,15 +1799,24 @@ def exitor():
 
 @app.route('/upgrade')
 def testHtml():
-    try:
-        subprocess.run([sys.executable, "updateMe.py"], check=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Error while running script: {e}")
-    finally:
-        # Exit the runner script
-        python = sys.executable
-        os.execl(python, python, *sys.argv)
-    return "Updating..."
+    if check_update()==1:
+        try:
+            subprocess.run([sys.executable, "updateMe.py"], check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Error while running script: {e}")
+        finally:
+            python = sys.executable
+            os.execl(python, python, *sys.argv)
+    return """<!DOCTYPE html>
+<html>
+   <head>
+      <title>HTML Meta Tag</title>
+      <meta http-equiv = "refresh" content = "3; url = /" />
+   </head>
+   <body>
+      <p>Redirecting to another URL</p>
+   </body>
+</html>"""
 
 
 @app.route('/testsubmit', methods=['POST'])
