@@ -48,7 +48,6 @@ if __name__ == "__main__":
         shutil.copytree(os.path.join(os.getcwd(),"Dashboard\\src"), os.path.join(os.getcwd(),"src"))
         os.system(f'copy  "C:\\Users\\mohak\\Documents\\orders.db" {os.path.join(os.getcwd(),"src")}')
         print("update complete")
-        shutil.rmtree(github_url.rstrip('/').split('/')[-1].replace('.git', ''))
         sys.exit(1)
     else:
         print("Update not required")
