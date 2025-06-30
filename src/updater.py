@@ -10,6 +10,7 @@ def check_update():
     if response.status_code == 200:
         file_content = response.json()
         print("available version update is :",file_content)
+        print("current version is:",version)
         if int(file_content) > int(version):
             print("Update available")
             return 1
