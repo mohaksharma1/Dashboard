@@ -1805,8 +1805,8 @@ def testHtml():
         except subprocess.CalledProcessError as e:
             print(f"Error while running script: {e}")
         finally:
-            python = sys.executable
-            os.execl(python, python, *sys.argv)
+            # python = sys.executable
+            # os.execl(python, python, *sys.argv)
             sys.exit(1)
     return """<!DOCTYPE html>
 <html>
