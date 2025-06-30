@@ -2,10 +2,10 @@ import requests
 
 def check_update():
     version=""
-    with open('version', 'r') as file:
+    with open('src\\version', 'r') as file:
         data = file.read()
         version=data
-    url = "https://raw.githubusercontent.com/mohaksharma1/Dashboard/main/version"
+    url = "https://raw.githubusercontent.com/mohaksharma1/Dashboard/refs/heads/main/src/version"
     response = requests.get(url)
     if response.status_code == 200:
         file_content = response.json()
