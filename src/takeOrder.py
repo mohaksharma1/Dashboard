@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream:takeOrder.py
 import base64
 import datetime,subprocess, sys
@@ -1864,6 +1865,8 @@ if __name__ == '__main__':
     from waitress import serve
     serve(app, host="0.0.0.0", port=5000)
 =======
+=======
+>>>>>>> Stashed changes
 import base64
 import datetime,subprocess, sys
 import os
@@ -3730,4 +3733,7 @@ if __name__ == '__main__':
     # Start the Flask app
     from waitress import serve
     serve(app, host="0.0.0.0", port=5000)
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes:src/takeOrder.py
+=======
+>>>>>>> Stashed changes
