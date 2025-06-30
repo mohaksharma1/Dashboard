@@ -149,7 +149,6 @@ def welcome():
 
 <div class="container">
     <h1>Welcome to Silver Scissors Admin Dashboard</h1>
-    <h1>Hello Megha</h1>
     <p>Manage orders, ledger, and status efficiently with categorized tools.</p>
     '''+f'''<p>{msg}</p>
      <a href="/upgrade"><p>{upd}</p></a>
