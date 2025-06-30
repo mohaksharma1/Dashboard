@@ -9,6 +9,7 @@ def check_update():
     response = requests.get(url)
     if response.status_code == 200:
         file_content = response.json()
+        print("available version update is :",file_content)
         if int(file_content) > int(version):
             print("Update available")
             return 1
