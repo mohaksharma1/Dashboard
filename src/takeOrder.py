@@ -522,8 +522,10 @@ def getBill():
     </div>
     <!-- QR Code -->
     <div class="qr-section">
-    <img src="upi_qr.png" width="100" height="100" /><a>Scan To Pay</a>
+    <img src="upi_qr.png" width="100" height="100" />
     </div>
+    <a>Scan To Pay</a>
+
 
 
 
