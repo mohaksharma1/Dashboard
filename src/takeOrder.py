@@ -64,6 +64,9 @@ def favicon():
 def bill():
     return send_from_directory(app.static_folder, 'bill.png')
 
+@app.route('/upi_qr.png')
+def upi_qr():
+    return send_from_directory(app.static_folder, 'upi_qr.png')
 
 @app.route('/icon.png')
 def icon():
@@ -339,7 +342,27 @@ def getBill():
             </tr>
             '''
         total = total + amount
-        qrData=f"upi://pay?pa=mohaksharma1@pingpay&pn=Megha Sharma&am={str(total)}&cu=INR&tn=OrderNo{str(order_no)}"
+        # qrData=f"upi://pay?pa=6901457812@airtel&am={str(total)}&cu=INR&tn=OrderNo{str(order_no)}"
+    import qrcode
+
+        # Define the UPI payment URL with the desired amount
+    upi_url = f"upi://pay?pa=6901457812@airtel&pn=Megha+Sharma&am={str(total)}&cu=INR"
+
+        # Generate the QR code
+    qr = qrcode.make(upi_url)
+
+        # Save the QR code as an image file
+    qr.save("upi_qr.png")
+    source_file = 'upi_qr.png'  # Replace with your source file path
+    destination_folder = 'src\\static'  # Replace with your destination folder path
+
+    # Create the destination folder if it doesn't exist
+    os.makedirs(destination_folder, exist_ok=True)
+    #
+    # # Move the file to the subfolder
+    shutil.move(source_file, os.path.join(destination_folder, os.path.basename(source_file)))
+
+
 
     return '''
    <!DOCTYPE html>
@@ -492,17 +515,17 @@ def getBill():
         <tbody>''' + table + f'''
         </tbody>
     </table>
-
-    <!-- QR Code -->
-    <div class="qr-section">
-    <img id='barcode' src="https://api.qrserver.com/v1/create-qr-code/?data={qrData}&amp;size=100x100" alt="" title="Payment" width="100" height="100" />
-    </div>
-
     <!-- Total Amount -->
     <div class="total-section">
         <label>Total: </label>
         <span>₹ {total}</span>
     </div>
+    <!-- QR Code -->
+    <div class="qr-section">
+    <img src="upi_qr.png" width="100" height="100" /><a>Scan To Pay</a>
+    </div>
+
+
 
     
 </div>
