@@ -1,5 +1,6 @@
 @echo off
 :run_script
+START "" /B python "splash/view.py"
 RMDIR /S /Q Dashboard
 C:\Users\mohak\AppData\Local\BraveSoftware\Brave-Browser\Application\chrome_proxy.exe  --profile-directory=Default --app-id=dpckklemgligkjpihmopkkknllapmclp
 python "src/takeOrder.py"

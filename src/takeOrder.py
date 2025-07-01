@@ -339,6 +339,7 @@ def getBill():
             </tr>
             '''
         total = total + amount
+        qrData=f"upi://pay?pa=mohaksharma1@pingpay&pn=Megha Sharma&am={str(total)}&cu=INR&tn=OrderNo{str(order_no)}"
 
     return '''
    <!DOCTYPE html>
@@ -407,6 +408,12 @@ def getBill():
         .items-table td {
             background-color: #fcfcfc;
         }
+
+        .qr-section{
+            text-align: left;
+            margin-top: 20px;
+        }
+
         .total-section {
             text-align: right;
             margin-top: 20px;
@@ -485,6 +492,11 @@ def getBill():
         <tbody>''' + table + f'''
         </tbody>
     </table>
+
+    <!-- QR Code -->
+    <div class="qr-section">
+    <img id='barcode' src="https://api.qrserver.com/v1/create-qr-code/?data={qrData}&amp;size=100x100" alt="" title="Payment" width="100" height="100" />
+    </div>
 
     <!-- Total Amount -->
     <div class="total-section">
