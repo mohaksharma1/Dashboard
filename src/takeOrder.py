@@ -4,7 +4,7 @@ import os
 import shutil
 import sqlite3
 
-from flask import Flask, request, send_from_directory, render_template
+from flask import Flask, request, send_from_directory, render_template,redirect
 from updater import check_update
 
 database = 'orders.db'
@@ -1832,7 +1832,7 @@ def submit():
         image_file.write(image_data)
 
     source_file = 'bill.png'  # Replace with your source file path
-    destination_folder = 'static'  # Replace with your destination folder path
+    destination_folder = 'src\\static'  # Replace with your destination folder path
 
     # Create the destination folder if it doesn't exist
     os.makedirs(destination_folder, exist_ok=True)
@@ -1840,33 +1840,7 @@ def submit():
     # # Move the file to the subfolder
     shutil.move(source_file, os.path.join(destination_folder, os.path.basename(source_file)))
     msg = "http://192.168.1.8:5000/bill.png"
-    return '''
-    <html>
-    <body >
-
-''' + f'<a href="{msg}" download="bill.png">Download bill</a>' + '''
-
-   <button id="shareBtn">Share Image</button>
-
-    <script>
-        document.getElementById("shareBtn").addEventListener("click", function() {
-            if (typeof Android !== "undefined" && Android.shareImage) {
-                Android.shareImage("http://192.168.1.8:5000/bill.png"); // Replace with actual image URL
-            } else {
-                console.error("Android interface not found!");
-            }
-        });
-    </script>
-
-
-
-
-
-
-
-</body>
-</html>
-'''
+    return redirect(msg)
 
 
 if __name__ == '__main__':
